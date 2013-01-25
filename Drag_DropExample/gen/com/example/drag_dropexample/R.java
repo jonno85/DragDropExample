@@ -14,14 +14,13 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int clear_row=0x7f020000;
-        public static final int empty_background=0x7f020001;
-        public static final int empty_row=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
-        public static final int ic_menu_camera_holo_dark=0x7f020004;
-        public static final int ic_popup_reminder=0x7f020005;
-        public static final int redstar=0x7f020006;
-        public static final int start_drag=0x7f020007;
+        public static final int drag_over=0x7f020000;
+        public static final int ic_launcher=0x7f020001;
+        public static final int ic_menu_camera_holo_dark=0x7f020002;
+        public static final int ic_popup_reminder=0x7f020003;
+        public static final int redstar=0x7f020004;
+        public static final int start_drag=0x7f020005;
+        public static final int transparent=0x7f020006;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f080000;

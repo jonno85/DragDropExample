@@ -146,9 +146,9 @@ public class MainActivity extends Activity {
 	
 	private class LineDragListener implements OnDragListener{
 
-		Drawable starDrag = getResources().getDrawable(R.drawable.start_drag);
-		Drawable emptyRow = getResources().getDrawable(R.drawable.empty_row);
-		Drawable clearRow = getResources().getDrawable(R.drawable.clear_row);
+		Drawable starDrag		= getResources().getDrawable(R.drawable.start_drag);
+		Drawable transparent	= getResources().getDrawable(R.drawable.transparent); //back to original color
+		Drawable dragOver		= getResources().getDrawable(R.drawable.drag_over);
 		private String description;
 		@Override
 		public boolean onDrag(View v, DragEvent event) {
@@ -157,24 +157,26 @@ public class MainActivity extends Activity {
 			
 			switch (action) {
 			case DragEvent.ACTION_DRAG_STARTED:
-				//Draggable
-				if(event.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)){
-					v.setBackgroundDrawable(starDrag);
-					return true;		
-				} else {	// Not Draggable
-					return false;
-				}
+				Log.e("EVENT DRAG_STARTED", ""+action);
+				v.setBackgroundDrawable(starDrag);
+				break;
 			case DragEvent.ACTION_DRAG_ENTERED:
-				v.setBackgroundDrawable(emptyRow);
+				Log.e("EVENT DRAG_ENTERED", ""+action);
+				v.setBackgroundDrawable(dragOver);
 				break;
 			case DragEvent.ACTION_DROP:
 				//CLIP DATA reachable only in ACTION_DROP
 				int n = event.getClipData().getItemCount();
-				Log.e("DROPPED", "testo annesso " + description + " CLIP ITEM " + n);
-			case DragEvent.ACTION_DRAG_EXITED:
-				v.setBackgroundDrawable(clearRow);
+				Log.e("EVENT ACTION_DROP", ""+action);
+				v.setBackgroundDrawable(transparent);
 				break;
-			default:
+			case DragEvent.ACTION_DRAG_EXITED:
+				v.setBackgroundDrawable(starDrag);
+				Log.e("EVENT DRAG_EXITED", ""+action);
+				break;
+			case DragEvent.ACTION_DRAG_ENDED:
+				Log.e("EVENT ACTION_ENDED", ""+action);
+				v.setBackgroundDrawable(transparent);
 				break;
 			}
 			return true;
