@@ -1,34 +1,34 @@
 package com.example.drag_dropexample;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipDescription;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
 import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
 	public final String 			TAG = "element";	
 	private String[]				description;
-	private GridLayout				gridLeft;
+	private FrameLayout				frameLeft;
 	private TextView[]				texts;
 	private ArrayList<LinearLayout>	layouts;
 	
@@ -68,7 +68,7 @@ public class MainActivity extends Activity {
 		findViewById(R.id.myimage19).setOnTouchListener(new ElementTouchListener());
 		findViewById(R.id.myimage20).setOnTouchListener(new ElementTouchListener());
 		
-		gridLeft = (GridLayout)findViewById(R.id.gridLeft);
+		frameLeft = (FrameLayout)findViewById(R.id.frameLeft);
 			
 		texts	= new TextView[10];
 		layouts = new ArrayList<LinearLayout>();
@@ -102,22 +102,21 @@ public class MainActivity extends Activity {
 		l.addView(new Button(this), lp);
 		layouts.add(l);
 		
-		Iterator<LinearLayout> it = layouts.iterator();
-		ViewGroup.LayoutParams vp = new ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, 10);
 		Log.e("NUMERO ELEMENTI", " " + layouts.size());
-		while (it.hasNext()) {
-			LinearLayout element	= it.next();
-			LinearLayout empty_el	= new LinearLayout(this);
+		
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		GridLayout gridLeft = (GridLayout)inflater.inflate(R.layout.customizable_list, null);
+		
+		for(int i=0; i<layouts.size(); i++){
+			LinearLayout element	= layouts.get(i);
+			gridLeft.addView(element);
+			LinearLayout empty_el = (LinearLayout) inflater.inflate(R.layout.empty_row, null);
 			empty_el.setTag("empty");
-			
 			empty_el.setOnDragListener(new LineDragListener());
 			gridLeft.addView(empty_el);
-			gridLeft.addView(element);
-			
 		}
-		
-
-		
+		frameLeft.addView(gridLeft);
+				
 	}
 
 	@Override
