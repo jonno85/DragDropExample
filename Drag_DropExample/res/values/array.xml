@@ -1,24 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="description">
-        <item name="1">1</item>
-        <item name="2">2</item>
-        <item name="3">3</item>
-        <item name="4">4</item>
-        <item name="5">5</item>
-        <item name="6">6</item>
-        <item name="7">7</item>
-        <item name="8">8</item>
-        <item name="9">9</item>
-        <item name="11">11</item>
-        <item name="12">12</item>
-        <item name="13">13</item>
-        <item name="14">14</item>
-        <item name="15">15</item>
-        <item name="16">16</item>
-        <item name="17">17</item>
-        <item name="18">18</item>
-        <item name="19">19</item>
-        <item name="20">20</item>
+    <string-array name="description">Elemento 
+        <item name="1">Elemento 1</item>
+        <item name="2">Elemento 2</item>
+        <item name="3">Elemento 3</item>
+        <item name="4">Elemento 4</item>
+        <item name="5">Elemento 5</item>
+        <item name="6">Elemento 6</item>
+        <item name="7">Elemento 7</item>
+        <item name="8">Elemento 8</item>
+        <item name="9">Elemento 9</item>
+        <item name="11">Elemento 11</item>
+        <item name="12">Elemento 12</item>
+        <item name="13">Elemento 13</item>
+        <item name="14">Elemento 14</item>
+        <item name="15">Elemento 15</item>
+        <item name="16">Elemento 16</item>
+        <item name="17">Elemento 17</item>
+        <item name="18">Elemento 18</item>
+        <item name="19">Elemento 19</item>
+        <item name="20">Elemento 20</item>
     </string-array>
+
+	<string-array name="icons">
+		<item>@drawable/ic_menu_camera_holo_dark</item>
+		<item>@drawable/ic_popup_reminder</item>
+		<item>@drawable/redstar</item>
+		<item>@drawable/alert_dialog_icon</item>
+		<item>@drawable/ic_action_on_off</item>
+		<item>@drawable/ic_action_search</item>
+		<item>@drawable/ic_action_share</item>
+		<item>@drawable/ic_home</item>
+		<item>@drawable/yellowstar</item>
+		<item>@drawable/star_big_on</item>
+	</string-array>
+
+	<string-array name="img_views">
+		<item>@id/myimage1</item>
+		<item>@id/myimage2</item>
+		<item>@id/myimage3</item>
+		<item>@id/myimage4</item>
+		<item>@id/myimage5</item>
+		<item>@id/myimage6</item>
+		<item>@id/myimage7</item>
+		<item>@id/myimage8</item>
+		<item>@id/myimage9</item>
+		<item>@id/myimage10</item>
+		<item>@id/myimage11</item>
+		<item>@id/myimage12</item>
+		<item>@id/myimage13</item>
+		<item>@id/myimage14</item>
+		<item>@id/myimage15</item>
+		<item>@id/myimage16</item>
+		<item>@id/myimage17</item>
+		<item>@id/myimage18</item>
+		<item>@id/myimage19</item>
+		<item>@id/myimage20</item>
+	</string-array>
 </resources>
