@@ -23,6 +23,7 @@
     </string-array>
 
 	<string-array name="icons">
+		<item>@drawable/ic_launcher</item>
 		<item>@drawable/ic_menu_camera_holo_dark</item>
 		<item>@drawable/ic_popup_reminder</item>
 		<item>@drawable/redstar</item>

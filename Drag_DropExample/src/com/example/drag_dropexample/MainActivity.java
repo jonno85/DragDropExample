@@ -1,10 +1,11 @@
 package com.example.drag_dropexample;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,27 +16,25 @@ import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
+import android.view.View.OnClickListener;
 import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 
 public class MainActivity extends Activity implements OnDragListener {
 
 	public final String 				TAG = "element";	
-	private FrameLayout					frameLeft;
-	private ArrayList<LinearLayout>		layouts = new ArrayList<LinearLayout>();
+	private LinkedList<LinearLayout>	layouts = new LinkedList<LinearLayout>();
 	private LinearLayout.LayoutParams	linearParams;
 	private LayoutInflater				inflater;
 	private GridLayout 					gridLeft;
 	private Integer						index = 0;
 	private String[]					description;
-	private TypedArray					imgs;
+	private TypedArray					imgs, icons;
 
 	
 	@Override
@@ -46,7 +45,8 @@ public class MainActivity extends Activity implements OnDragListener {
 		
 		description	= getResources().getStringArray(R.array.description);
 		imgs		= getResources().obtainTypedArray(R.array.img_views);
-		
+		icons		= getResources().obtainTypedArray(R.array.icons);
+		gridLeft	= (GridLayout)findViewById(R.id.grid);
 		
 		ImageView img1 = (ImageView)findViewById(R.id.myimage1);
 		img1.setTag(description[0]);
@@ -60,23 +60,21 @@ public class MainActivity extends Activity implements OnDragListener {
 		
 		int nImgView = imgs.length();
 		for(int i=0; i<nImgView; i++){
-			Log.i("VALUE AT ", ""+imgs.getResourceId(i, 0));
-			findViewById(imgs.getResourceId(i, 0)).setOnTouchListener(new ElementTouchListener());
+			int rID		= imgs.getResourceId(i, 0);
+			int rIcon	= icons.getResourceId(i%icons.length(), 0);
+			ImageView img = (ImageView)findViewById(rID);
+			img.setImageResource(rIcon);
+			img.setTag(new DDTag(rIcon, description[i%description.length]));
+			img.setOnTouchListener(new ElementTouchListener());
 		}
 
-		frameLeft = (FrameLayout)findViewById(R.id.frameLeft);
-		
 		linearParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 													LinearLayout.LayoutParams.MATCH_PARENT);
 		linearParams.bottomMargin = 20;
 		
-		layouts.add(0, buildRow(description[0], 0, false));
-		layouts.add(1, buildRow(description[1], 0, false));
-		layouts.add(2, buildRow(description[2], 0, false));
-		
-		gridLeft = (GridLayout)inflater.inflate(R.layout.customizable_list, null);
-		
-		frameLeft.addView(gridLeft);
+		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[0]), false));
+		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[1]), false));
+		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[2]), false));
 		
 		fillGridLayout();
 	}
@@ -92,19 +90,23 @@ public class MainActivity extends Activity implements OnDragListener {
 	 * @param text
 	 * @return
 	 */
-	private LinearLayout buildRow(String text, int resIcon, boolean added){
-		LinearLayout l = (LinearLayout) inflater.inflate(R.layout.filled_row, null);
-		
-		Button b	= (Button)l.findViewById(R.id.button);
-		TextView t	= (TextView)l.findViewById(R.id.text);
+	private LinearLayout buildRow(DDTag tag, boolean added){
+		LinearLayout	l = (LinearLayout) inflater.inflate(R.layout.filled_row, null);
+		Button b		= (Button)		l.findViewById(R.id.button);
+		TextView t		= (TextView)	l.findViewById(R.id.text);
+		ImageView img	= (ImageView)	l.findViewById(R.id.image);
 
-		if(resIcon != 0){
-			ImageView img = (ImageView)findViewById(resIcon);
+		// CHECK WHY IS NOT WORKING
+		Log.i("IMAGEVIEW id", ""+tag.getrImage());
+		img.setImageResource(tag.getrImage());
+
+		if(tag.getProbablyInt() != -1){
+			tag.setProbablyInt(index++);
 		}
 
-		l.setTag(index++);
+		l.setTag(tag);
 		b.setText("Push");
-		t.setText(text);
+		t.setText(tag.getrDescription());
 
 		if(added){
 			Button bCancel = new Button(this);
@@ -123,31 +125,39 @@ public class MainActivity extends Activity implements OnDragListener {
 
 	private void fillGridLayout(){
 		int i, j;
+		LinearLayout empty_el = null, element;
 		index = 0;
 		gridLeft.removeAllViews();
 		for(i=0, j=0; i<layouts.size(); i++){
-			LinearLayout empty_el = (LinearLayout) inflater.inflate(R.layout.empty_row, null);
-			empty_el.setTag(j);
+			empty_el = (LinearLayout) inflater.inflate(R.layout.empty_row, null);
+			empty_el.setTag(new DDTag(i));
 			empty_el.setOnDragListener(this);
+			element = layouts.get(i);
+
 			gridLeft.addView(empty_el, j++);
-			LinearLayout element = layouts.get(i);
 			gridLeft.addView(element, j++);
 		}
-		LinearLayout empty_el = (LinearLayout) inflater.inflate(R.layout.empty_row, null);
-		empty_el.setTag(j);
+		empty_el = (LinearLayout) inflater.inflate(R.layout.empty_row, null);
+		empty_el.setTag(new DDTag(i));
 		empty_el.setOnDragListener(this);
 		gridLeft.addView(empty_el, j);
 	}
-	
+
+	/**
+	 * Element's list Listener
+	 * @author F31999A
+	 *
+	 */
 	private class ElementTouchListener implements OnTouchListener {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
 			switch(event.getAction()){
 			case MotionEvent.ACTION_DOWN:
-				ClipData data = ClipData.newPlainText("CLIP", (CharSequence) v.getTag());
-				
-				
-				//data.addItem(new ClipData.Item(text));
+				ClipData data = ClipData.newPlainText("CLIP", ((DDTag)v.getTag()).getrDescription());
+				Intent intent = new Intent();
+				intent.putExtra("ICON", ((DDTag)v.getTag()).getrImage());
+				data.addItem(new ClipData.Item(intent));
+
 				DragShadowBuilder shadowBuilder = new DragShadowBuilder(v);
 				v.startDrag(data, shadowBuilder, v, 0);
 				v.setVisibility(View.VISIBLE);
@@ -160,12 +170,10 @@ public class MainActivity extends Activity implements OnDragListener {
 
 	@Override
 	public boolean onDrag(View v, DragEvent event) {
-		Drawable starDrag		= getResources().getDrawable(R.drawable.start_drag);	//effect showed on the drag's beginning 
-		Drawable dragOver		= getResources().getDrawable(R.drawable.drag_over);		//effect showed on the drag's selected
-		
-		int action = event.getAction();
+		Drawable starDrag	= getResources().getDrawable(R.drawable.start_drag);	//effect showed on the drag's beginning 
+		Drawable dragOver	= getResources().getDrawable(R.drawable.drag_over);		//effect showed on the drag's selected
 
-		switch (action) {
+		switch (event.getAction()) {
 		case DragEvent.ACTION_DRAG_STARTED:
 			v.setBackgroundDrawable(starDrag);
 			break;
@@ -173,17 +181,10 @@ public class MainActivity extends Activity implements OnDragListener {
 			v.setBackgroundDrawable(dragOver);
 			break;
 		case DragEvent.ACTION_DROP:
-			String s = "";
-			int resId = 0;
-			if(event.getClipData().getItemAt(0).getText() != null){
-				s		= event.getClipData().getItemAt(0).getText().toString();
-				resId	= Integer.parseInt(event.getClipData().getItemAt(1).getText().toString());
-			} else {
-				s = new String("no Description associated");
-			}
-			//gridLeft.addView(buildRow(s));
-			Log.i("DIMMI CHE TAG HAI", ""+v.getTag());
-			layouts.add(Integer.parseInt((String) v.getTag().toString()), buildRow(s, resId, true));
+			DDTag tag = new DDTag(event.getClipData().getItemAt(1).getIntent().getIntExtra("ICON", 0), event.getClipData().getItemAt(0).getText().toString());
+			DDTag tag1 = (DDTag)v.getTag(); //TAG from LinearLayout
+			Log.i("ACTION_DROP IMG GetTag id", ""+tag.getrImage());
+			layouts.add(tag1.getProbablyInt(), buildRow(tag, true));
 			fillGridLayout();
 			v.setBackgroundDrawable(null);
 			break;
