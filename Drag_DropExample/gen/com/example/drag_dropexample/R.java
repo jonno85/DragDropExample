@@ -15,6 +15,9 @@ public final class R {
     }
     public static final class attr {
     }
+    public static final class color {
+        public static final int highlight_color_filter=0x7f050000;
+    }
     public static final class drawable {
         public static final int alert_dialog_icon=0x7f020000;
         public static final int drag_over=0x7f020001;
@@ -28,40 +31,42 @@ public final class R {
         public static final int ic_popup_reminder=0x7f020009;
         public static final int ic_settings_display=0x7f02000a;
         public static final int redstar=0x7f02000b;
-        public static final int star_big_on=0x7f02000c;
-        public static final int start_drag=0x7f02000d;
-        public static final int transparent=0x7f02000e;
-        public static final int yellowstar=0x7f02000f;
+        public static final int shadow=0x7f02000c;
+        public static final int shadow2=0x7f02000d;
+        public static final int star_big_on=0x7f02000e;
+        public static final int start_drag=0x7f02000f;
+        public static final int transparent=0x7f020010;
+        public static final int yellowstar=0x7f020011;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f080000;
-        public static final int button=0x7f08001a;
-        public static final int grid=0x7f080002;
-        public static final int image=0x7f080018;
-        public static final int menu_settings=0x7f08001b;
-        public static final int myimage1=0x7f080004;
-        public static final int myimage10=0x7f08000d;
-        public static final int myimage11=0x7f08000e;
-        public static final int myimage12=0x7f08000f;
-        public static final int myimage13=0x7f080010;
-        public static final int myimage14=0x7f080011;
-        public static final int myimage15=0x7f080012;
-        public static final int myimage16=0x7f080013;
-        public static final int myimage17=0x7f080014;
-        public static final int myimage18=0x7f080015;
-        public static final int myimage19=0x7f080016;
-        public static final int myimage2=0x7f080005;
-        public static final int myimage20=0x7f080017;
-        public static final int myimage3=0x7f080006;
-        public static final int myimage4=0x7f080007;
-        public static final int myimage5=0x7f080008;
-        public static final int myimage6=0x7f080009;
-        public static final int myimage7=0x7f08000a;
-        public static final int myimage8=0x7f08000b;
-        public static final int myimage9=0x7f08000c;
-        public static final int scrollRight=0x7f080003;
-        public static final int scrollViewLeft=0x7f080001;
-        public static final int text=0x7f080019;
+        public static final int LinearLayout1=0x7f090000;
+        public static final int button=0x7f09001a;
+        public static final int grid=0x7f090002;
+        public static final int image=0x7f090018;
+        public static final int menu_settings=0x7f09001b;
+        public static final int myimage1=0x7f090004;
+        public static final int myimage10=0x7f09000d;
+        public static final int myimage11=0x7f09000e;
+        public static final int myimage12=0x7f09000f;
+        public static final int myimage13=0x7f090010;
+        public static final int myimage14=0x7f090011;
+        public static final int myimage15=0x7f090012;
+        public static final int myimage16=0x7f090013;
+        public static final int myimage17=0x7f090014;
+        public static final int myimage18=0x7f090015;
+        public static final int myimage19=0x7f090016;
+        public static final int myimage2=0x7f090005;
+        public static final int myimage20=0x7f090017;
+        public static final int myimage3=0x7f090006;
+        public static final int myimage4=0x7f090007;
+        public static final int myimage5=0x7f090008;
+        public static final int myimage6=0x7f090009;
+        public static final int myimage7=0x7f09000a;
+        public static final int myimage8=0x7f09000b;
+        public static final int myimage9=0x7f09000c;
+        public static final int scrollRight=0x7f090003;
+        public static final int scrollViewLeft=0x7f090001;
+        public static final int text=0x7f090019;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -69,13 +74,13 @@ public final class R {
         public static final int filled_row=0x7f030002;
     }
     public static final class menu {
-        public static final int activity_main=0x7f070000;
+        public static final int activity_main=0x7f080000;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
-        public static final int desc=0x7f050003;
-        public static final int hello_world=0x7f050001;
-        public static final int menu_settings=0x7f050002;
+        public static final int app_name=0x7f060000;
+        public static final int desc=0x7f060003;
+        public static final int hello_world=0x7f060001;
+        public static final int menu_settings=0x7f060002;
     }
     public static final class style {
         /** 
@@ -99,10 +104,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

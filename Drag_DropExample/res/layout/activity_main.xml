@@ -9,7 +9,7 @@
     <ScrollView
         android:id="@+id/scrollViewLeft"
         android:layout_width="400dp"
-        android:layout_height="600dp" >
+        android:layout_height="400dp" >
 
         <GridLayout
             android:id="@+id/grid"
@@ -38,8 +38,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage2"
@@ -47,8 +46,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/redstar" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage3"
@@ -56,8 +54,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_menu_camera_holo_dark" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage4"
@@ -65,8 +62,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_popup_reminder" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage5"
@@ -74,8 +70,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage6"
@@ -83,8 +78,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage7"
@@ -92,8 +86,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage8"
@@ -101,8 +94,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage9"
@@ -110,8 +102,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage10"
@@ -119,8 +110,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage11"
@@ -128,8 +118,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage12"
@@ -137,8 +126,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage13"
@@ -146,8 +134,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage14"
@@ -155,50 +142,43 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/desc"
                 android:paddingBottom="10dp"
-                android:paddingRight="20dp"
-                android:src="@drawable/ic_launcher" />
+                android:paddingRight="20dp" />
 
             <ImageView
                 android:id="@+id/myimage15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc"
-                android:src="@drawable/ic_launcher" />
+                android:contentDescription="@string/desc" />
 
             <ImageView
                 android:id="@+id/myimage16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc"
-                android:src="@drawable/ic_launcher" />
+                android:contentDescription="@string/desc" />
 
             <ImageView
                 android:id="@+id/myimage17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc"
-                android:src="@drawable/ic_launcher" />
+                android:contentDescription="@string/desc" />
 
             <ImageView
                 android:id="@+id/myimage18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc"
-                android:src="@drawable/ic_launcher" />
+                android:contentDescription="@string/desc" />
 
             <ImageView
                 android:id="@+id/myimage19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc"
-                android:src="@drawable/ic_launcher" />
+                android:contentDescription="@string/desc" />
 
             <ImageView
                 android:id="@+id/myimage20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/desc"
-                android:src="@drawable/ic_launcher" />
+                android:contentDescription="@string/desc" />
         </GridLayout>
     </ScrollView>
 

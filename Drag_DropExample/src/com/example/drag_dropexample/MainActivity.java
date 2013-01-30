@@ -7,6 +7,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnDragListener {
@@ -33,6 +35,7 @@ public class MainActivity extends Activity implements OnDragListener {
 	private LinearLayout.LayoutParams	linearParams;
 	private LayoutInflater				inflater;
 	private GridLayout 					gridLeft;
+	private ScrollView					scrollView;
 	private String[]					description;
 	private TypedArray					imgs, icons;
 
@@ -45,13 +48,14 @@ public class MainActivity extends Activity implements OnDragListener {
 		description	= getResources().getStringArray(R.array.description);
 		imgs		= getResources().obtainTypedArray(R.array.img_views);
 		icons		= getResources().obtainTypedArray(R.array.icons);
+		scrollView	= (ScrollView)findViewById(R.id.scrollViewLeft);
 		gridLeft	= (GridLayout)findViewById(R.id.grid);
 
 		int nImgView = imgs.length();
 		for(int i=0; i<nImgView; i++){
-			int rID		= imgs.getResourceId(i, 0);
-			int rIcon	= icons.getResourceId(i%icons.length(), 0);
-			ImageView img = (ImageView)findViewById(rID);
+			int rID			= imgs.getResourceId(i, 0);
+			int rIcon		= icons.getResourceId(i%icons.length(), 0);
+			ImageView img	= (ImageView)findViewById(rID);
 			img.setImageResource(rIcon);
 			img.setTag(new DDTag(rIcon, description[i%description.length]));
 			img.setOnTouchListener(new ElementTouchListener());
@@ -65,7 +69,7 @@ public class MainActivity extends Activity implements OnDragListener {
 		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[1]), false));
 		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[2]), false));
 		
-		fillGridLayout();
+		fillGridLayout(0);
 	}
 
 	@Override
@@ -80,10 +84,10 @@ public class MainActivity extends Activity implements OnDragListener {
 	 * @return
 	 */
 	private LinearLayout buildRow(DDTag tag, boolean added){
-		final LinearLayout	l = (LinearLayout) inflater.inflate(R.layout.filled_row, null);
-		Button b		= (Button)		l.findViewById(R.id.button);
-		TextView t		= (TextView)	l.findViewById(R.id.text);
-		ImageView img	= (ImageView)	l.findViewById(R.id.image);
+		final LinearLayout	l 	= (LinearLayout) inflater.inflate(R.layout.filled_row, null);
+		Button				b	= (Button)		l.findViewById(R.id.button);
+		TextView			t	= (TextView)	l.findViewById(R.id.text);
+		ImageView			img	= (ImageView)	l.findViewById(R.id.image);
 
 		l.setTag(tag);
 		b.setText("Push");
@@ -97,7 +101,7 @@ public class MainActivity extends Activity implements OnDragListener {
 				@Override
 				public void onClick(View v) {
 					layouts.remove(l);
-					fillGridLayout();
+					fillGridLayout(0);
 				}
 			});
 			l.addView(bCancel);
@@ -120,7 +124,7 @@ public class MainActivity extends Activity implements OnDragListener {
 	/**
 	 * Refill the left side grid with all the entries from layouts LinkedList<LinearLayout>
 	 */
-	private void fillGridLayout(){
+	private void fillGridLayout(int scroll){
 		int i = 0;
 		LinearLayout element;
 		gridLeft.removeAllViews();
@@ -130,6 +134,12 @@ public class MainActivity extends Activity implements OnDragListener {
 			gridLeft.addView(element);
 		}
 		gridLeft.addView(getNewEmptyLine(i));
+		if(scroll != 0){
+			int value = scroll * 5;
+			scrollView.requestFocus();
+			scrollView.scrollTo(scroll, value);
+			Log.d("SCROLL", "" + value);
+		}
 	}
 
 	/**
@@ -152,10 +162,11 @@ public class MainActivity extends Activity implements OnDragListener {
 
 				v.startDrag(data, shBuilder, v, 0);
 				v.setVisibility(View.VISIBLE);
-				return true;
+				break;
 			default:
 				return false;
 			}
+			return true;
 		}
 	}
 
@@ -180,8 +191,9 @@ public class MainActivity extends Activity implements OnDragListener {
 			DDTag dtTag = new DDTag(event.getClipData().getItemAt(1).getIntent().getIntExtra(ICON, 0),
 									event.getClipData().getItemAt(0).getText().toString());
 			//getTag from LinearLayout
-			layouts.add((Integer)v.getTag(), buildRow(dtTag, true));
-			fillGridLayout();
+			int index = (Integer)v.getTag();
+			layouts.add(index, buildRow(dtTag, true));
+			fillGridLayout(index);
 			v.setBackgroundDrawable(null);
 			break;
 		case DragEvent.ACTION_DRAG_EXITED:
