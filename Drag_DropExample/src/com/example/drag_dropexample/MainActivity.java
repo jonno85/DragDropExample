@@ -2,12 +2,12 @@ package com.example.drag_dropexample;
 
 import java.util.LinkedList;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -136,7 +136,6 @@ public class MainActivity extends Activity implements OnDragListener {
 		gridLeft.addView(getNewEmptyLine(i));
 		if(scroll != 0){
 			int value = scroll * 5;
-			scrollView.requestFocus();
 			scrollView.scrollTo(scroll, value);
 			Log.d("SCROLL", "" + value);
 		}

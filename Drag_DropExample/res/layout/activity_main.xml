@@ -9,7 +9,9 @@
     <ScrollView
         android:id="@+id/scrollViewLeft"
         android:layout_width="400dp"
-        android:layout_height="400dp" >
+        android:layout_height="400dp"
+        android:background="@drawable/shadow2"
+        android:fillViewport="true" >
 
         <GridLayout
             android:id="@+id/grid"
@@ -24,7 +26,8 @@
     <ScrollView
         android:id="@+id/scrollRight"
         android:layout_width="400dp"
-        android:layout_height="200dp" >
+        android:layout_height="300dp"
+        android:background="@drawable/shadow2" >
 
         <GridLayout
             android:layout_width="match_parent"
