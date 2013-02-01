@@ -41,8 +41,8 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f090000;
         public static final int button=0x7f09001a;
-        public static final int grid=0x7f090002;
         public static final int image=0x7f090018;
+        public static final int list=0x7f090002;
         public static final int menu_settings=0x7f09001b;
         public static final int myimage1=0x7f090004;
         public static final int myimage10=0x7f09000d;
