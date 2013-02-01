@@ -6,13 +6,15 @@
     android:gravity="center_horizontal|center_vertical"
     tools:context=".MainActivity" >
 
-    <com.example.drag_dropexample.RunScreenScrollView
+    <ScrollView
         android:id="@+id/scrollViewLeft"
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:background="@drawable/shadow2"
         android:fillViewport="true"
         android:paddingTop="5dp"
+        android:fadeScrollbars="false"
+        android:requiresFadingEdge="vertical"
         android:paddingBottom="10dp" >
 
         <LinearLayout
@@ -22,7 +24,7 @@
             android:orientation="vertical" >
         </LinearLayout>
 
-    </com.example.drag_dropexample.RunScreenScrollView>
+    </ScrollView>
 
     <ScrollView
         android:id="@+id/scrollRight"

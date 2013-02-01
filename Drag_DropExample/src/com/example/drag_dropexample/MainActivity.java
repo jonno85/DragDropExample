@@ -35,11 +35,10 @@ public class MainActivity extends Activity {
 	private LinearLayout.LayoutParams	linearParams;
 	private LayoutInflater				inflater;
 	private LinearLayout				listLeft;
-	private RunScreenScrollView			scrollView;
+	private ScrollView					scrollView;
 	private String[]					description;
 	private TypedArray					imgs, icons;
 	private int							yScroll = 0;
-	private int							scrollTo = 0;
 	private OnDragListener				emptyLineListener;
 	private Drawable					starDrag; 
 	private Drawable					dragOver;
@@ -54,11 +53,20 @@ public class MainActivity extends Activity {
 		description	= getResources().getStringArray(R.array.description);
 		imgs		= getResources().obtainTypedArray(R.array.img_views);
 		icons		= getResources().obtainTypedArray(R.array.icons);
-		scrollView	= (RunScreenScrollView)findViewById(R.id.scrollViewLeft);
+		scrollView	= (ScrollView)findViewById(R.id.scrollViewLeft);
 		listLeft	= (LinearLayout)findViewById(R.id.list);
 
 		starDrag = getResources().getDrawable(R.drawable.start_drag);	//effect showed on the drag's beginning
 		dragOver = getResources().getDrawable(R.drawable.drag_over);	//effect showed on the drag's selected
+		
+		scrollView.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Log.i("TOUCH",""+scrollView.getScrollY());
+				return false;
+			}
+		});
 		
 		emptyLineListener = new OnDragListener() {
 			//DragListener method that manage single element grid destination
@@ -70,8 +78,11 @@ public class MainActivity extends Activity {
 					case DragEvent.ACTION_DRAG_ENTERED:
 						v.setBackgroundDrawable(dragOver);
 						break;
+					case DragEvent.ACTION_DRAG_LOCATION:
+						break;
 					case DragEvent.ACTION_DRAG_STARTED:
 						v.setBackgroundDrawable(starDrag);
+						scrollView.setScrollY(yScroll);
 						break;
 					case DragEvent.ACTION_DROP:
 						//Item 0: Description
@@ -81,7 +92,9 @@ public class MainActivity extends Activity {
 						//getTag from LinearLayout
 						int index = (Integer)v.getTag();
 						layouts.add(index, buildRow(dtTag, true));
-						yScroll = scrollView.getScrollY();
+						yScroll = (scrollView.getScrollY() - (index * 10));
+						setScrollY();
+						
 						Log.i("DROP", "yScroll "+yScroll);
 						fillGridLayout();
 						break;
@@ -93,7 +106,7 @@ public class MainActivity extends Activity {
 						break;
 					}
 				} else { //STATIC LINEAR LAYOUT 
-					Log.i("NULL TAG", "Static ROW ");
+					//Log.i("NULL TAG", "Static ROW ");
 				}
 				return true;
 			}
@@ -113,6 +126,9 @@ public class MainActivity extends Activity {
 													LinearLayout.LayoutParams.MATCH_PARENT);
 		linearParams.bottomMargin = 20;
 		
+		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[0]), false));
+		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[1]), false));
+		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[2]), false));
 		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[0]), false));
 		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[1]), false));
 		layouts.add(buildRow(new DDTag(icons.getResourceId(0, 0), description[2]), false));
@@ -150,6 +166,7 @@ public class MainActivity extends Activity {
 				public void onClick(View v) {
 					layouts.remove(l);
 					yScroll = scrollView.getScrollY();
+					Log.i("REMOVE", "yScroll "+yScroll);
 					fillGridLayout();
 				}
 			});
@@ -185,16 +202,12 @@ public class MainActivity extends Activity {
 			listLeft.addView(element);
 		}
 		listLeft.addView(getNewEmptyLine(i));
-		scrollView.post(new Runnable() {
-			
-			@Override
-			public void run() {
-				scrollView.setScrollY(yScroll);	
-			}
-		});
-		Log.d("SCROLL", "" + yScroll);
 	}
 
+	private void setScrollY(){
+		Log.i("FILLGRID SET", "yScroll "+yScroll);
+		scrollView.setScrollY(yScroll);	
+	}
 	/**
 	 * Element's list Listener
 	 */
@@ -215,6 +228,7 @@ public class MainActivity extends Activity {
 
 				v.startDrag(data, shBuilder, v, 0);
 				v.setVisibility(View.VISIBLE);
+				yScroll = scrollView.getScrollY();
 				break;
 			default:
 				return false;
